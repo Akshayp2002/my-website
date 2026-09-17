@@ -1,6 +1,6 @@
 # Momento Web Studio
 
-A hyper-modern, premium agency landing page for selling custom digital experiences — personalized birthday wishing sites, digital wedding invitations, mini product pages, and small shop showcases.
+A clean, light-mode studio landing page for Momenta Studio — selling custom invitation and celebration websites: weddings, engagements, birthdays, anniversaries, housewarmings, baby showers, and more.
 
 ## Tech Stack
 
@@ -33,10 +33,12 @@ All landing page content is driven by [lib/data.ts](lib/data.ts). Update:
 
 ## Demo Pages
 
-- `/demos/birthday` — Birthday microsite demo
 - `/demos/wedding` — Wedding invitation demo
-- `/demos/shop` — Small shop showcase demo
-- `/demos/product` — Single product launch demo
+- `/demos/engagement` — Engagement announcement demo
+- `/demos/birthday` — Birthday microsite demo
+- `/demos/anniversary` — Anniversary tribute demo
+- `/demos/housewarming` — Housewarming invitation demo
+- `/demos/baby-shower` — Baby shower invitation demo
 
 ## Development
 
@@ -58,3 +60,4 @@ npm run build
 - Place real demo screenshots in `public/demos/` and reference them in `lib/data.ts`.
 - Until images are added, graceful CSS fallbacks display a "Preview coming soon" placeholder.
 - Static export compatibility is enabled with `images.unoptimized: true` in `next.config.ts`.
+"# my-website" 
