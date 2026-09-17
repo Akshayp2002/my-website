@@ -1,0 +1,59 @@
+"use client";
+
+import { Heart, Share2, Sparkles, TrendingUp, Zap, PenTool } from "lucide-react";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion";
+import { services, type Service } from "@/lib/data";
+
+const iconMap = {
+  sparkles: Sparkles,
+  heart: Heart,
+  "trending-up": TrendingUp,
+  "share-2": Share2,
+  zap: Zap,
+  "pen-tool": PenTool,
+};
+
+function ValueCard({ service }: { service: Service }) {
+  const Icon = iconMap[service.icon];
+  return (
+    <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-8 backdrop-blur-sm transition-all hover:border-violet-400/30 hover:shadow-xl hover:shadow-violet-900/10">
+      <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white shadow-lg shadow-violet-500/20">
+        <Icon className="h-6 w-6" />
+      </div>
+      <h3 className="mb-3 text-xl font-semibold text-white">{service.title}</h3>
+      <p className="leading-relaxed text-zinc-400">{service.description}</p>
+    </div>
+  );
+}
+
+export function ValueProposition() {
+  return (
+    <section id="services" className="px-4 py-24 md:px-8 lg:px-12 lg:py-32">
+      <div className="mx-auto max-w-6xl">
+        <FadeIn className="mb-16 text-center">
+          <span className="text-sm font-semibold uppercase tracking-wider text-violet-400">
+            Why custom web pages?
+          </span>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-white md:text-5xl">
+            A dedicated site beats a generic post.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-zinc-400">
+            Social posts disappear in feeds. A custom web experience stays, tells
+            your story, and gives your audience something to remember.
+          </p>
+        </FadeIn>
+
+        <StaggerContainer
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          staggerDelay={0.1}
+        >
+          {services.map((service) => (
+            <StaggerItem key={service.id}>
+              <ValueCard service={service} />
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+      </div>
+    </section>
+  );
+}

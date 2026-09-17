@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Momento Web Studio
 
-## Getting Started
+A hyper-modern, premium agency landing page for selling custom digital experiences — personalized birthday wishing sites, digital wedding invitations, mini product pages, and small shop showcases.
 
-First, run the development server:
+## Tech Stack
+
+- **Next.js 16** (App Router, TypeScript)
+- **React 19**
+- **Tailwind CSS 4**
+- **Framer Motion**
+- **Lucide React**
+
+## Project Structure
+
+| Path | Purpose |
+| --- | --- |
+| `app/page.tsx` | Composed landing page |
+| `app/layout.tsx` | Root layout + metadata |
+| `app/globals.css` | Theme + global styles |
+| `app/demos/*` | Interactive live demo routes |
+| `components/` | Reusable section components |
+| `lib/data.ts` | Centralized content (demos, pricing, contact, services) |
+| `public/demos/` | Demo preview screenshots |
+
+## Customization
+
+All landing page content is driven by [lib/data.ts](lib/data.ts). Update:
+
+- `demos` → add/edit demo cards and preview images
+- `services` → update "Why Choose Custom Web Pages?"
+- `pricingPackages` → edit packages, prices, and WhatsApp messages
+- `CONTACT` → set your WhatsApp number, email, and brand name
+
+## Demo Pages
+
+- `/demos/birthday` — Birthday microsite demo
+- `/demos/wedding` — Wedding invitation demo
+- `/demos/shop` — Small shop showcase demo
+- `/demos/product` — Single product launch demo
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+## Notes
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Place real demo screenshots in `public/demos/` and reference them in `lib/data.ts`.
+- Until images are added, graceful CSS fallbacks display a "Preview coming soon" placeholder.
+- Static export compatibility is enabled with `images.unoptimized: true` in `next.config.ts`.
