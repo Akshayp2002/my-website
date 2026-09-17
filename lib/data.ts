@@ -6,10 +6,17 @@
 // No component code needs to be touched for routine content changes.
 // ============================================================================
 
-export type DemoCategory = "Birthday" | "Wedding" | "Shop" | "Product";
+export type DemoCategory =
+  | "Wedding"
+  | "Engagement"
+  | "Birthday"
+  | "Anniversary"
+  | "Housewarming"
+  | "Baby Shower"
+  | "Other";
 
 export interface Demo {
-  /** Unique id — used as React key and slug */
+  /** Unique id — used as React key */
   id: string;
   /** Visual category badge shown on the card */
   category: DemoCategory;
@@ -22,25 +29,34 @@ export interface Demo {
    * Place screenshots inside /public/demos/ and reference them as "/demos/your-file.png".
    */
   image: string;
-  /** Route that the "Live Demo" button opens */
+  /**
+   * URL that the "Live Demo" button opens.
+   * Use an internal path like "/demos/wedding" for built-in demos,
+   * or an absolute external URL like "https://client-site.com" for live client work.
+   */
   demoUrl: string;
+  /**
+   * Optional hint shown next to the demo button.
+   * e.g. "Opens external site" for live client links.
+   */
+  demoHint?: string;
 }
 
 export interface Service {
   id: string;
   title: string;
   description: string;
-  icon: "sparkles" | "heart" | "trending-up" | "share-2" | "zap" | "pen-tool";
+  icon: "heart" | "sparkles" | "users" | "share-2" | "zap" | "pen-tool";
 }
 
 export interface PricingPackage {
   id: string;
   title: string;
   subtitle: string;
-  /** Standard fixed price (shown with strikethrough) */
-  standardPrice: number;
-  /** Limited-time special offer price */
-  offerPrice: number;
+  /** Starting price shown to visitors; final quote depends on requirements */
+  startingFrom: number;
+  /** Optional reference full price shown with strikethrough */
+  standardPrice?: number;
   /** Bullet list of included features */
   features: string[];
   /** CTA label */
@@ -53,44 +69,64 @@ export interface PricingPackage {
 
 // ----------------------------------------------------------------------------
 // 1. DEMO SHOWCASE ARRAY
-// Update this array to add / remove / edit live demo cards.
+// Mix internal preview demos with live client sites you have built.
+// For external sites, use an absolute URL (https://...) and add a demoHint.
 // ----------------------------------------------------------------------------
 export const demos: Demo[] = [
   {
-    id: "birthday-wish-1",
-    category: "Birthday",
-    title: "Personalized Birthday Experience",
+    id: "live-wedding-client",
+    category: "Wedding",
+    title: "A Recent Wedding Invite",
     description:
-      "A heartfelt, interactive birthday microsite with photo galleries, music, confetti, and a custom message board.",
+      "A real wedding invitation we designed for a client. Clean typography, RSVP form, couple photos, and a warm, personal flow.",
+    image: "/demos/wedding-preview.jpg",
+    demoUrl: "https://example-client-wedding.com",
+    demoHint: "Opens a live client website",
+  },
+  {
+    id: "birthday-wish",
+    category: "Birthday",
+    title: "Birthday Wish Page",
+    description:
+      "Surprise someone with a personalized microsite: photo gallery, music, handwritten-style messages, and celebratory details.",
     image: "/demos/birthday-preview.jpg",
     demoUrl: "/demos/birthday",
   },
   {
-    id: "wedding-invite-1",
-    category: "Wedding",
-    title: "Digital Wedding Invitation",
+    id: "anniversary-celebration",
+    category: "Anniversary",
+    title: "Anniversary Tribute",
     description:
-      "An elegant invitation with RSVP handling, event timeline, couple story gallery, and guest directions.",
-    image: "/demos/wedding-preview.jpg",
-    demoUrl: "/demos/wedding",
+      "Celebrate years of togetherness with a romantic timeline, shared memories, and a heartfelt message for your partner.",
+    image: "/demos/anniversary-preview.jpg",
+    demoUrl: "/demos/anniversary",
   },
   {
-    id: "local-shop-1",
-    category: "Shop",
-    title: "Mini Product Showcase",
+    id: "housewarming-invite",
+    category: "Housewarming",
+    title: "Housewarming Invitation",
     description:
-      "A compact storefront for local businesses with product cards, pricing, and direct WhatsApp ordering.",
-    image: "/demos/shop-preview.jpg",
-    demoUrl: "/demos/shop",
+      "Invite guests to your new home with directions, ceremony timings, and a warm, modern design they will remember.",
+    image: "/demos/housewarming-preview.jpg",
+    demoUrl: "/demos/housewarming",
   },
   {
-    id: "product-launch-1",
-    category: "Product",
-    title: "Small Product Launch Page",
+    id: "engagement-invite",
+    category: "Engagement",
+    title: "Engagement Announcement",
     description:
-      "A high-converting single-page launch site with hero gallery, feature list, testimonials, and inquiry CTA.",
-    image: "/demos/product-preview.jpg",
-    demoUrl: "/demos/product",
+      "Elegant save-the-date style page to announce your engagement with photos, date, venue, and a warm call to celebrate.",
+    image: "/demos/engagement-preview.jpg",
+    demoUrl: "/demos/engagement",
+  },
+  {
+    id: "baby-shower-invite",
+    category: "Baby Shower",
+    title: "Baby Shower Invite",
+    description:
+      "A soft, joyful invitation for baby showers with event details, gift registry hints, and cute photo moments.",
+    image: "/demos/baby-shower-preview.jpg",
+    demoUrl: "/demos/baby-shower",
   },
 ];
 
@@ -100,45 +136,45 @@ export const demos: Demo[] = [
 // ----------------------------------------------------------------------------
 export const services: Service[] = [
   {
-    id: "permanent-memories",
-    title: "Permanent Memories",
+    id: "personal-touch",
+    title: "Made for Your Moment",
     description:
-      "Unlike a fleeting social post, a custom web page lives forever and becomes a keepsake you can revisit anytime.",
+      "Every design is built around your story — your colors, photos, words, and feelings. Nothing mass-produced, nothing generic.",
     icon: "heart",
   },
   {
-    id: "interactive-experiences",
-    title: "Interactive Experiences",
+    id: "share-easily",
+    title: "One Link, Every Guest",
     description:
-      "Add music, animations, galleries, RSVP forms, maps, and confetti to make moments feel truly special.",
-    icon: "sparkles",
-  },
-  {
-    id: "professional-edge",
-    title: "Professional Edge",
-    description:
-      "A branded microsite gives your event or local shop a polished, premium impression that builds trust instantly.",
-    icon: "trending-up",
-  },
-  {
-    id: "easy-sharing",
-    title: "Effortless Sharing",
-    description:
-      "Share a single memorable link via WhatsApp, email, or invitation cards — no apps or logins required for guests.",
+      "Send your invitation or tribute through WhatsApp, email, or print it on a card. Guests open it instantly — no app needed.",
     icon: "share-2",
   },
   {
-    id: "fast-delivery",
-    title: "Fast Delivery",
+    id: "beautiful-interactions",
+    title: "Details That Delight",
     description:
-      "From brief to live site in days, not weeks, so you never miss the perfect moment.",
+      "Smooth animations, gentle music, photo galleries, RSVP forms, maps, and little surprises that make people smile.",
+    icon: "sparkles",
+  },
+  {
+    id: "fast-reliable",
+    title: "Ready in 1 Day",
+    description:
+      "We move quickly so you don't have to worry. Share your details, approve the preview, and your site goes live the same day.",
     icon: "zap",
   },
   {
-    id: "made-for-you",
-    title: "Made For You",
+    id: "real-support",
+    title: "Human Support",
     description:
-      "Every color, font, photo, and message is tailored to your story — no cookie-cutter templates.",
+      "Talk directly to the designer. Ask questions, request changes, and get honest guidance on what works best for your occasion.",
+    icon: "users",
+  },
+  {
+    id: "lasting-keepasake",
+    title: "A Keepsake Forever",
+    description:
+      "Unlike a story that disappears, your page stays live as a beautiful memory you and your loved ones can revisit anytime.",
     icon: "pen-tool",
   },
 ];
@@ -149,63 +185,61 @@ export const services: Service[] = [
 // ----------------------------------------------------------------------------
 export const pricingPackages: PricingPackage[] = [
   {
-    id: "birthday-package",
-    title: "Birthday Wishes Package",
-    subtitle: "Everything you need to make someone feel celebrated",
+    id: "wedding-package",
+    title: "Wedding Invitation",
+    subtitle: "Your big day, beautifully announced",
+    startingFrom: 1999,
     standardPrice: 3999,
-    offerPrice: 2499,
+    features: [
+      "Multi-section wedding website",
+      "Couple story + photo gallery",
+      "RSVP form + guest count tracking",
+      "Event map, timings, calendar link",
+      "Background music + smooth animations",
+      "WhatsApp-shareable link",
+      "2 rounds of revisions",
+    ],
+    cta: "Order Wedding Site",
+    whatsappMessage:
+      "Hi! I'm interested in the Wedding Invitation Package (starting from ₹1,999). Please share the next steps.",
+    featured: true,
+  },
+  {
+    id: "celebration-package",
+    title: "Celebration Package",
+    subtitle: "Engagement, anniversary, housewarming, baby shower",
+    startingFrom: 1499,
+    standardPrice: 2999,
+    features: [
+      "Custom invitation or tribute site",
+      "Event details + photo gallery",
+      "Map / directions + timings",
+      "Personalized message section",
+      "Music + elegant animations",
+      "Mobile-first + shareable link",
+      "2 rounds of revisions",
+    ],
+    cta: "Order Celebration Site",
+    whatsappMessage:
+      "Hi! I'm interested in the Celebration Package (starting from ₹1,499). Please share the next steps.",
+  },
+  {
+    id: "birthday-package",
+    title: "Birthday Wishes",
+    subtitle: "A joyful surprise for someone special",
+    startingFrom: 999,
+    standardPrice: 2499,
     features: [
       "1-page personalized birthday microsite",
       "Photo gallery + custom message section",
       "Background music + confetti animation",
       "Mobile & desktop responsive",
-      "Shareable link ready in 2–3 days",
-      "1 round of free revisions",
+      "Shareable link ready in 1 day",
+      "1 round of revisions",
     ],
     cta: "Order Birthday Site",
     whatsappMessage:
-      "Hi! I'm interested in the Birthday Wishes Package (special offer ₹2,499). Please share the next steps.",
-    featured: true,
-  },
-  {
-    id: "wedding-package",
-    title: "Wedding Invitation Package",
-    subtitle: "A stunning digital invitation for your big day",
-    standardPrice: 5999,
-    offerPrice: 3999,
-    features: [
-      "Multi-section wedding invitation",
-      "Couple story gallery + timeline",
-      "RSVP form + guest count tracking",
-      "Event location map & calendar link",
-      "Music + smooth scroll animations",
-      "Mobile-first, WhatsApp-shareable link",
-      "2 rounds of free revisions",
-    ],
-    cta: "Order Wedding Site",
-    whatsappMessage:
-      "Hi! I'm interested in the Wedding Invitation Package (special offer ₹3,999). Please share the next steps.",
-    featured: true,
-  },
-  {
-    id: "shop-package",
-    title: "Mini Shop Showcase",
-    subtitle: "A clean storefront for your local business",
-    standardPrice: 4999,
-    offerPrice: 3499,
-    features: [
-      "Up to 8 product/service cards",
-      "WhatsApp order button per product",
-      "About section + contact details",
-      "Opening hours + location info",
-      "Google-friendly + shareable link",
-      "Delivered in 3–4 days",
-      "1 round of free revisions",
-    ],
-    cta: "Order Shop Site",
-    whatsappMessage:
-      "Hi! I'm interested in the Mini Shop Showcase Package (special offer ₹3,499). Please share the next steps.",
-    featured: false,
+      "Hi! I'm interested in the Birthday Wishes Package (starting from ₹999). Please share the next steps.",
   },
 ];
 
@@ -218,11 +252,11 @@ export const CONTACT = {
   /** WhatsApp number in international format, no + or spaces */
   whatsappNumber: "919876543210",
   /** Business email address */
-  email: "hello@youragency.com",
+  email: "hello@momentastudio.in",
   /** Brand / agency name */
-  brand: "Momento Web Studio",
+  brand: "Momenta Studio",
   /** Tagline used in the navbar / footer */
-  tagline: "Custom digital experiences for your moments & business.",
+  tagline: "Custom invitation and celebration websites, designed with heart.",
 } as const;
 
 // Helper to build WhatsApp click-to-chat URLs

@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Momento Web Studio | Custom Digital Experiences",
+  title: "Momenta Studio | Custom Invitation & Celebration Websites",
   description:
-    "Premium custom web experiences for birthdays, weddings, local shops, and product launches. Beautiful, shareable, and live in days.",
+    "Beautiful, made-to-order websites for weddings, birthdays, anniversaries, housewarmings, and every milestone worth celebrating. Personal, premium, and ready to share.",
 };
 
 export default function RootLayout({
@@ -27,10 +27,15 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-50">
+      <body
+        className="min-h-full flex flex-col bg-background text-foreground"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
   );
 }
+

@@ -1,13 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
+  --background: #fafafa;
+  --foreground: #18181b;
+  --ink: #18181b;
+  --muted: #71717a;
+  --paper: #ffffff;
+  --violet: #7c3aed;
+  --violet-light: #a78bfa;
+  --fuchsia: #d946ef;
+  --amber: #f59e0b;
+  --rose: #e11d48;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-paper: var(--paper);
+  --color-violet: var(--violet);
+  --color-violet-light: var(--violet-light);
+  --color-fuchsia: var(--fuchsia);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -19,11 +32,12 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
 }
 
 ::selection {
-  background: rgba(139, 92, 246, 0.4);
-  color: #ffffff;
+  background: rgba(124, 58, 237, 0.18);
+  color: #18181b;
 }
 
 /* Demo card image fallback when /public preview images are missing */
@@ -33,4 +47,52 @@ body {
 
 .image-fallback img {
   display: none;
+}
+
+/* Abstract organic blob used behind hero/pricing */
+.blob {
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  animation: blob-morph 18s ease-in-out infinite;
+}
+
+@keyframes blob-morph {
+  0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  25% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+  50% { border-radius: 50% 60% 30% 60% / 50% 70% 30% 50%; }
+  75% { border-radius: 60% 40% 60% 40% / 70% 30% 50% 60%; }
+}
+
+/* Subtle grain texture overlay */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Floating decorative rings */
+.ring-accent {
+  border: 1px solid rgba(124, 58, 237, 0.12);
+  border-radius: 50%;
+}
+
+/* Dashed arc decoration */
+.arc {
+  width: 120px;
+  height: 120px;
+  border: 1px dashed rgba(124, 58, 237, 0.2);
+  border-radius: 50%;
+  animation: spin-slow 24s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Paper card shadow */
+.paper-shadow {
+  box-shadow: 0 1px 0 0 rgba(0,0,0,0.04), 0 4px 24px -12px rgba(0,0,0,0.08);
 }

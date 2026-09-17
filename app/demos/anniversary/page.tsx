@@ -2,24 +2,24 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Cake, Calendar, Heart, Music } from "lucide-react";
+import { ArrowLeft, Calendar, Heart, Image, Music } from "lucide-react";
 
-export default function BirthdayDemoPage() {
+export default function AnniversaryDemoPage() {
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-violet-50 via-fuchsia-50 to-rose-50 px-6 py-20 text-zinc-900">
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-rose-50 via-violet-50 to-stone-100 px-6 py-20 text-zinc-900">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-violet-300/20 blur-xl"
+            className="absolute rounded-full bg-violet-300/20 blur-2xl"
             style={{
-              width: `${80 + i * 40}px`,
-              height: `${80 + i * 40}px`,
-              left: `${(i * 13) % 100}%`,
-              top: `${(i * 17) % 100}%`,
+              width: `${100 + i * 30}px`,
+              height: `${100 + i * 30}px`,
+              left: `${(i * 11) % 100}%`,
+              top: `${(i * 19) % 100}%`,
             }}
-            animate={{ y: [0, -40, 0], opacity: [0.15, 0.3, 0.15] }}
-            transition={{ duration: 6 + i, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ y: [0, -30, 0], opacity: [0.12, 0.28, 0.12] }}
+            transition={{ duration: 7 + i, repeat: Infinity, ease: "easeInOut" }}
           />
         ))}
       </div>
@@ -27,24 +27,24 @@ export default function BirthdayDemoPage() {
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.6 }}
         className="relative z-10 w-full max-w-3xl text-center"
       >
-        <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/80 shadow-sm backdrop-blur-md">
-          <Cake className="h-8 w-8 text-amber-600" />
-        </div>
-        <h1 className="mb-4 text-5xl font-bold tracking-tight md:text-7xl">
-          Happy Birthday!
+        <p className="mb-4 text-sm uppercase tracking-[0.3em] text-violet-700">
+          Together Forever
+        </p>
+        <h1 className="mb-6 font-serif text-5xl font-light italic tracking-tight md:text-7xl">
+          Happy Anniversary
         </h1>
-        <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-zinc-600">
-          This is a sample birthday wishing experience. Real sites include the
-          recipient's name, photos, messages from friends, music, and an RSVP.
+        <p className="mx-auto mb-10 max-w-xl text-lg text-zinc-600">
+          A sample anniversary tribute. Real sites include a love timeline,
+          shared memories, photo gallery, music, and a heartfelt message.
         </p>
 
         <div className="grid gap-4 sm:grid-cols-3">
-          <FeatureCard icon={Calendar} label="Event Date" value="Coming Soon" />
-          <FeatureCard icon={Heart} label="Personalized" value="With Love" />
-          <FeatureCard icon={Music} label="Ambiance" value="Music + Photos" />
+          <FeatureCard icon={Calendar} label="Years" value="Together" />
+          <FeatureCard icon={Image} label="Memories" value="Photo Gallery" />
+          <FeatureCard icon={Music} label="Vibe" value="Your Song" />
         </div>
 
         <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -56,7 +56,7 @@ export default function BirthdayDemoPage() {
             Back to Home
           </Link>
           <a
-            href="https://wa.me/919999999999?text=I%20want%20a%20custom%20birthday%20wishing%20site"
+            href="https://wa.me/919999999999?text=I%20want%20a%20custom%20anniversary%20tribute%20site"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-violet-600 px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105"
@@ -80,7 +80,7 @@ function FeatureCard({
 }) {
   return (
     <div className="rounded-2xl border border-white/60 bg-white/70 p-5 text-center shadow-sm backdrop-blur-md">
-      <Icon className="mx-auto mb-3 h-6 w-6 text-amber-600" />
+      <Icon className="mx-auto mb-3 h-6 w-6 text-rose-600" />
       <p className="text-xs uppercase tracking-wider text-zinc-500">{label}</p>
       <p className="mt-1 text-lg font-semibold text-zinc-900">{value}</p>
     </div>
